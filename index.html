@@ -126,28 +126,36 @@
       perfect for Instagram captions, bios, YouTube, Facebook, Twitter, and more.
       Boring text? Not anymore! With 7 unique text styles, iText gives your words a fresh and funky new look.
     </span>
-  </p>
-  <button onclick="toggleText()" style="color: black; background-color: yellow; border: none; padding: 5px 10px; font-family: 'Pattaya', cursive; border-radius: 5px;">
-    see more
-  </button>
+  <p>
+  This is some text<span id="dots">...</span>
+  <span id="more" style="display:none;">
+    Here is the extra text that shows when you click see more.
+  </span>
+</p>
 
-  <script>
-    function toggleText() {
-      var dots = document.getElementById("dots");
-      var moreText = document.getElementById("more");
-      var btn = event.target;
+<button onclick="toggleText(event)" 
+        style="color: white; background-color: transparent; border: none; padding: 5px 10px; font-family: 'Pattaya', cursive; border-radius: 5px; cursor: pointer;">
+  Touch to see more
+</button>
 
-      if (dots.style.display === "none") {
-        dots.style.display = "inline";
-        moreText.style.display = "none";
-        btn.innerHTML = "Touch to see more";
-      } else {
-        dots.style.display = "none";
-        moreText.style.display = "inline";
-        btn.innerHTML = "Show less";
-      }
+<script>
+  function toggleText(event) {
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btn = event.target;
+
+    if (dots.style.display === "none") {
+      dots.style.display = "inline";
+      moreText.style.display = "none";
+      btn.innerHTML = "Touch to see more";
+    } else {
+      dots.style.display = "none";
+      moreText.style.display = "inline";
+      btn.innerHTML = "Show less";
     }
-  </script>
+  }
+</script>
+
 </div>
     
 </div>
