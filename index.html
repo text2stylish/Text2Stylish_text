@@ -255,7 +255,7 @@
 
   /* Popup Overlay */
   .popupOverlay {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.4);
@@ -283,8 +283,8 @@
     color: #333;
   }
 
-  /* Close Button */
-  .close-btn {
+  /* Green Close Button */
+  .close-btn-success {
     padding: 6px 18px;
     font-size: 14px;
     font-weight: 600;
@@ -295,8 +295,24 @@
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  .close-btn:hover {
+  .close-btn-success:hover {
     background: linear-gradient(45deg, #087f23, #4caf50);
+  }
+
+  /* Red Close Button */
+  .close-btn-fail {
+    padding: 6px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #f44336, #b71c1c);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .close-btn-fail:hover {
+    background: linear-gradient(45deg, #b71c1c, #f44336);
   }
 </style>
 
@@ -309,7 +325,7 @@
 <div id="successPopup" class="popupOverlay">
   <div class="popup-content">
     <p>Thank you for sharing!</p>
-    <button class="close-btn" id="closeSuccessBtn">Close</button>
+    <button class="close-btn-success" id="closeSuccessBtn">Close</button>
   </div>
 </div>
 
@@ -317,7 +333,7 @@
 <div id="failPopup" class="popupOverlay">
   <div class="popup-content">
     <p>Sharing cancelled or failed!</p>
-    <button class="close-btn" id="closeFailBtn">Close</button>
+    <button class="close-btn-fail" id="closeFailBtn">Close</button>
   </div>
 </div>
 
@@ -338,13 +354,11 @@
     try {
       if (navigator.share) {
         await navigator.share(shareData);
-        // Sharing succeeded
         successPopup.style.display = 'flex';
       } else {
         alert('Sharing not supported on this browser.');
       }
     } catch (err) {
-      // Sharing failed or cancelled
       failPopup.style.display = 'flex';
     }
   });
@@ -357,10 +371,10 @@
     failPopup.style.display = 'none';
   });
 
-  // Close popup if clicked outside content
   successPopup.addEventListener('click', (e) => {
     if (e.target === successPopup) successPopup.style.display = 'none';
   });
+
   failPopup.addEventListener('click', (e) => {
     if (e.target === failPopup) failPopup.style.display = 'none';
   });
