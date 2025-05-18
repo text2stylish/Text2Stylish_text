@@ -225,3 +225,143 @@
   </script>
 </body>
 </html>
+<!-- Font Awesome CDN for share icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+  /* Share Button */
+  #shareBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 22px;
+    background: linear-gradient(45deg, #4caf50, #087f23);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    transition: background 0.3s ease;
+  }
+  #shareBtn:hover {
+    background: linear-gradient(45deg, #087f23, #4caf50);
+  }
+  #shareBtn i {
+    font-size: 16px;
+  }
+
+  /* Popup Overlay */
+  .popupOverlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Popup Box */
+  .popup-content {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    max-width: 280px;
+  }
+
+  /* Popup Text */
+  .popup-content p {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    color: #333;
+  }
+
+  /* Close Button */
+  .close-btn {
+    padding: 6px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #4caf50, #087f23);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .close-btn:hover {
+    background: linear-gradient(45deg, #087f23, #4caf50);
+  }
+</style>
+
+<!-- Share Button -->
+<button id="shareBtn">
+  <i class="fas fa-share-alt"></i> Share This Tool
+</button>
+
+<!-- Success Popup -->
+<div id="successPopup" class="popupOverlay">
+  <div class="popup-content">
+    <p>Thank you for sharing!</p>
+    <button class="close-btn" id="closeSuccessBtn">Close</button>
+  </div>
+</div>
+
+<!-- Failure Popup -->
+<div id="failPopup" class="popupOverlay">
+  <div class="popup-content">
+    <p>Sharing cancelled or failed!</p>
+    <button class="close-btn" id="closeFailBtn">Close</button>
+  </div>
+</div>
+
+<script>
+  const shareBtn = document.getElementById('shareBtn');
+  const successPopup = document.getElementById('successPopup');
+  const failPopup = document.getElementById('failPopup');
+  const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+  const closeFailBtn = document.getElementById('closeFailBtn');
+
+  shareBtn.addEventListener('click', async () => {
+    const shareData = {
+      title: 'Stylish Text Generator by Zyraon',
+      text: 'Check out this cool stylish text generator!',
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        // Sharing succeeded
+        successPopup.style.display = 'flex';
+      } else {
+        alert('Sharing not supported on this browser.');
+      }
+    } catch (err) {
+      // Sharing failed or cancelled
+      failPopup.style.display = 'flex';
+    }
+  });
+
+  closeSuccessBtn.addEventListener('click', () => {
+    successPopup.style.display = 'none';
+  });
+
+  closeFailBtn.addEventListener('click', () => {
+    failPopup.style.display = 'none';
+  });
+
+  // Close popup if clicked outside content
+  successPopup.addEventListener('click', (e) => {
+    if (e.target === successPopup) successPopup.style.display = 'none';
+  });
+  failPopup.addEventListener('click', (e) => {
+    if (e.target === failPopup) failPopup.style.display = 'none';
+  });
+</script>
