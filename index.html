@@ -380,14 +380,49 @@
     if (e.target === failPopup) failPopup.style.display = 'none';
   });
 </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Tool Name</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            text-align: center;
+            padding: 10px;
+            background: #f0f0f0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        nav a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
 <body>
-  <!-- Yahan aapka tool ka main content rahega -->
+    <!-- Main content of your tool goes here -->
+    <div style="padding: 20px; margin-bottom: 60px;">
+        <h1>Welcome to My Tool</h1>
+        <p>This is where your main content would go.</p>
+    </div>
 
-  <!-- Yeh footer navigation niche dikhai dega -->
-  <nav style="text-align:center; padding: 10px; background:#f0f0f0;">
-    <a href="about.html" style="margin:0 10px;">About</a>
-    <a href="contact.html" style="margin:0 10px;">Contact</a>
-    <a href="privacy.html" style="margin:0 10px;">Privacy Policy</a>
-    <a href="terms.html" style="margin:0 10px;">Terms</a>
-  </nav>
+    <!-- Footer navigation -->
+    <nav>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
+    </nav>
 </body>
+</html>
