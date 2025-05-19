@@ -384,62 +384,173 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Your Tool Name</title>
     <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --light-text: #666;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --nav-link-bg: rgba(255, 255, 255, 0.3);
+            --nav-link-hover: rgba(0, 123, 255, 0.1);
+        }
+        
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+        
+        .content {
+            padding: 20px;
+            padding-bottom: 80px; /* Space for fixed nav */
+            text-align: center;
+            flex: 1;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        p {
+            color: var(--light-text);
+            max-width: 800px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+        
         nav {
             text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            background: var(--nav-bg);
             position: fixed;
             bottom: 0;
             width: 100%;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
+        
         nav a {
-            margin: 0 15px;
+            margin: 5px;
             text-decoration: none;
-            color: #333;
-            padding: 8px 20px;
+            color: var(--text-color);
+            padding: 8px 15px;
             border-radius: 20px;
             transition: all 0.3s ease;
             font-weight: 500;
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: var(--nav-link-bg);
             border: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            white-space: nowrap;
         }
+        
         nav a:hover {
-            color: #007bff;
-            background-color: rgba(0, 123, 255, 0.1);
+            color: var(--primary-color);
+            background-color: var(--nav-link-hover);
             border-color: rgba(0, 123, 255, 0.2);
             transform: translateY(-2px);
         }
-        .content {
-            padding: 20px;
-            margin-bottom: 80px;
-            text-align: center;
+        
+        /* Mobile-specific styles */
+        @media (max-width: 600px) {
+            .content {
+                padding-bottom: 70px;
+            }
+            
+            nav {
+                padding: 8px 5px;
+            }
+            
+            nav a {
+                padding: 6px 12px;
+                font-size: 12px;
+                margin: 3px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 14px;
+                padding: 0 10px;
+            }
         }
-        h1 {
-            color: #333;
+        
+        /* Custom color picker */
+        .color-picker {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
-        p {
-            color: #666;
+        
+        .color-option {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
         }
     </style>
 </head>
 <body>
+    <!-- Color picker -->
+    <div class="color-picker">
+        <div class="color-option" style="background-color: #007bff;" onclick="setTheme('#007bff', '#6c757d', '#f8f9fa')"></div>
+        <div class="color-option" style="background-color: #28a745;" onclick="setTheme('#28a745', '#6c757d', '#f8f9fa')"></div>
+        <div class="color-option" style="background-color: #dc3545;" onclick="setTheme('#dc3545', '#6c757d', '#f8f9fa')"></div>
+        <div class="color-option" style="background-color: #ffc107;" onclick="setTheme('#ffc107', '#6c757d', '#343a40')"></div>
+        <div class="color-option" style="background-color: #17a2b8;" onclick="setTheme('#17a2b8', '#6c757d', '#f8f9fa')"></div>
+    </div>
     <nav>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms</a>
     </nav>
+
+    <script>
+        // Theme changer function
+        function setTheme(primary, secondary, background) {
+            document.documentElement.style.setProperty('--primary-color', primary);
+            document.documentElement.style.setProperty('--secondary-color', secondary);
+            document.documentElement.style.setProperty('--background-color', background);
+            document.documentElement.style.setProperty('--nav-link-hover', primary + '20');
+            
+            // Adjust text color for dark backgrounds
+            if (background === '#343a40' || background === '#212529') {
+                document.documentElement.style.setProperty('--text-color', '#f8f9fa');
+                document.documentElement.style.setProperty('--light-text', '#dee2e6');
+                document.documentElement.style.setProperty('--nav-bg', 'rgba(33, 37, 41, 0.9)');
+                document.documentElement.style.setProperty('--nav-link-bg', 'rgba(33, 37, 41, 0.3)');
+            } else {
+                document.documentElement.style.setProperty('--text-color', '#333');
+                document.documentElement.style.setProperty('--light-text', '#666');
+                document.documentElement.style.setProperty('--nav-bg', 'rgba(255, 255, 255, 0.9)');
+                document.documentElement.style.setProperty('--nav-link-bg', 'rgba(255, 255, 255, 0.3)');
+            }
+        }
+    </script>
 </body>
 </html>
