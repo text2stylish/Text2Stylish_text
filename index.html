@@ -406,34 +406,36 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
-            padding: 20px;
-            background: transparent;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
             position: fixed;
             bottom: 0;
             width: 100%;
             box-sizing: border-box;
+            border-top: 1px solid #e0e0e0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
         }
         
         .nav-button {
-            padding: 12px 25px;
+            padding: 8px 15px;
             background-color: transparent;
             color: #000000;
-            border: 2px solid #000000;
-            border-radius: 30px;
+            border: 1px solid #000000;
+            border-radius: 20px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
             cursor: pointer;
-            min-width: 120px;
+            min-width: 80px;
             text-align: center;
         }
         
         .nav-button:hover {
             background-color: #000000;
             color: #ffffff;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
         
         @media (max-width: 600px) {
@@ -442,14 +444,14 @@
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 justify-content: flex-start;
-                padding: 10px;
+                padding: 8px;
                 -webkit-overflow-scrolling: touch;
             }
             
             .nav-button {
-                padding: 10px 20px;
-                font-size: 14px;
-                min-width: 100px;
+                padding: 6px 12px;
+                font-size: 12px;
+                min-width: 70px;
                 flex-shrink: 0;
             }
         }
@@ -457,10 +459,10 @@
 </head>
 <body>
     <div class="button-container">
-        <button class="nav-button">About</button>
-        <button class="nav-button">Privacy</button>
-        <button class="nav-button">Contact</button>
-        <button class="nav-button">Terms</button>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
     </div>
 
     <script>
