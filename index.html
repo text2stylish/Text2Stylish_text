@@ -382,5 +382,72 @@
     if (e.target === failPopup) failPopup.style.display = 'none';
   });
 </script>
-<a href="about.html">About Us</a> |
-<a href="privacy.html">Privacy Policy</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iText Stylish Tool</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background: linear-gradient(to right, #000000, #333333);
+      color: white;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .nav-buttons {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .link-btn {
+      text-decoration: none;
+      margin: 10px;
+      padding: 10px 25px;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.85);
+      border-radius: 30px;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      display: inline-block;
+      font-size: 1rem;
+    }
+
+    .link-btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    @media (max-width: 600px) {
+      .nav-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Stylish Buttons Section -->
+  <div class="nav-buttons">
+    <a href="about.html" class="link-btn">About Us</a>
+    <a href="privacy.html" class="link-btn">Privacy Policy</a>
+  </div>
+
+</body>
+</html>
