@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>iText - Stylish Text Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Pacifico&family=Rubik+Glitch&family=Rubik+Wet+Paint&family=Secular+One&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
       background: linear-gradient(45deg, #2b1055, #7597de);
@@ -12,25 +13,22 @@
       color: white;
       font-family: 'Arial', sans-serif;
       padding: 20px;
+      margin: 0;
     }
-
     .container {
       max-width: 800px;
       margin: 0 auto;
       text-align: center;
     }
-
     h1 {
       font-family: 'Rubik Wet Paint', cursive;
       color: #ff6b6b;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
       font-size: 2.5em;
     }
-
     .input-section {
       margin: 30px 0;
     }
-
     textarea {
       width: 80%;
       height: 100px;
@@ -40,11 +38,9 @@
       background: rgba(255,255,255,0.9);
       font-size: 1.2em;
     }
-
     .style-selector {
       margin: 20px 0;
     }
-
     select {
       padding: 10px 20px;
       border-radius: 25px;
@@ -54,7 +50,6 @@
       font-weight: bold;
       cursor: pointer;
     }
-
     .output-section {
       background: rgba(255,255,255,0.1);
       padding: 20px;
@@ -62,14 +57,12 @@
       margin: 20px 0;
       min-height: 100px;
     }
-
     .styled-text {
       font-size: 1.5em;
       margin: 20px 0;
       padding: 15px;
       word-wrap: break-word;
     }
-
     .copy-btn {
       background: #4CAF50;
       color: white;
@@ -81,16 +74,114 @@
       transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
       margin-top: 15px;
     }
-
     .copy-btn:hover {
       transform: scale(1.05);
     }
-
     .credit {
       margin-top: 30px;
       font-family: 'Dancing Script', cursive;
       font-size: 1.4em;
       color: #ffd93d;
+    }
+    .credit a {
+      color: #ffd93d;
+      text-decoration: none;
+    }
+    #shareBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      border-radius: 22px;
+      background: linear-gradient(45deg, #4caf50, #087f23);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      transition: background 0.3s ease;
+      margin-top: 20px;
+    }
+    #shareBtn:hover {
+      background: linear-gradient(45deg, #087f23, #4caf50);
+    }
+    #shareBtn i {
+      font-size: 16px;
+    }
+    .popupOverlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-content {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 280px;
+    }
+    .popup-content p {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      color: #333;
+    }
+    .close-btn-success, .close-btn-fail {
+      padding: 6px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .close-btn-success {
+      background: linear-gradient(45deg, #4caf50, #087f23);
+    }
+    .close-btn-success:hover {
+      background: linear-gradient(45deg, #087f23, #4caf50);
+    }
+    .close-btn-fail {
+      background: linear-gradient(45deg, #f44336, #b71c1c);
+    }
+    .close-btn-fail:hover {
+      background: linear-gradient(45deg, #b71c1c, #f44336);
+    }
+    .nav-buttons {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .link-btn {
+      text-decoration: none;
+      margin: 10px;
+      padding: 10px 25px;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.85);
+      border-radius: 30px;
+      background-color: transparent;
+      transition: all 0.3s ease;
+      display: inline-block;
+      font-size: 1rem;
+    }
+    .link-btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+    @media (max-width: 600px) {
+      .nav-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -112,29 +203,41 @@
       </div>
       <button class="copy-btn" onclick="copyText()">Copy Text 📋</button>
     </div>
-
-</body>
-</html>
-        
-        
-
     <div class="output-section">
       <div id="output" class="styled-text"></div>
     </div>
-    
-<!-- Google Font link -->
-<link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
-    
+    <button id="shareBtn">
+      <i class="fas fa-share-alt"></i> Share This Tool
+    </button>
     <div class="credit">
-      Created with ❤️ by <ahref= "target="_blank" style="color: #ffd93d;">Zyraon</a>
+      Created with ❤️ by <a href="https://www.instagram.com/zyraon.art/" target="_blank">Zyraon</a>
+    </div>
+    <div class="nav-buttons">
+      <a href="about.html" class="link-btn">About Us</a>
+      <a href="privacy.html" class="link-btn">Privacy Policy</a>
+      <a href="contact.html" class="link-btn">Contact</a>
+      <a href="terms.html" class="link-btn">Terms of Use</a>
     </div>
   </div>
-      
-  <script>
 
+  <!-- Popups -->
+  <div id="successPopup" class="popupOverlay">
+    <div class="popup-content">
+      <p>Your share has been noted – thank you!</p>
+      <button class="close-btn-success" id="closeSuccessBtn">Close</button>
+    </div>
+  </div>
+  <div id="failPopup" class="popupOverlay">
+    <div class="popup-content">
+      <p>Sharing cancelled or failed!</p>
+      <button class="close-btn-fail" id="closeFailBtn">Close</button>
+    </div>
+  </div>
+
+  <script>
+    let copyTimeout;
     const styles = {
       'handwriting': text => toScript(text),
-      'roman': text => text.split('').map(toItalic).join(''),
       'bold-style': text => text.replace(/[a-z]/gi, c =>
         String.fromCodePoint(
           c >= 'A' && c <= 'Z' ? c.charCodeAt(0) + 119743 :
@@ -146,9 +249,18 @@
       'cyber': text => toGlitch(text),
       'graffiti': text => toBubble(text),
       'modern': text => text.toUpperCase().split('').join(' '),
-      'shadow': text => text + ' ' + text,
       'gradient-text': text => text.split('').map((c, i) => i % 2 === 0 ? c.toUpperCase() : c.toLowerCase()).join('')
     };
+
+    const inputText = document.getElementById('inputText');
+    const styleSelect = document.getElementById('styleSelect');
+    const output = document.getElementById('output');
+    const copyBtn = document.querySelector('.copy-btn');
+    const shareBtn = document.getElementById('shareBtn');
+    const successPopup = document.getElementById('successPopup');
+    const failPopup = document.getElementById('failPopup');
+    const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+    const closeFailBtn = document.getElementById('closeFailBtn');
 
     function updateText() {
       const text = inputText.value;
@@ -156,51 +268,48 @@
       const styled = styles[style] ? styles[style](text) : text;
       output.className = 'styled-text';
       output.textContent = styled;
+      return styled;
     }
 
     function copyText() {
-      updateText();
-      const text = output.textContent.trim();
-
-      if (!text) {
+      const styledText = updateText();
+      if (!styledText.trim()) {
         showCopyMessage("Please enter text!", "#e74c3c");
         return;
       }
 
-      navigator.clipboard.writeText(text)
-        .then(() => {
-          if (copySound) copySound.play();
-          showCopyMessage("Copied!", "#2ecc71");
-        })
-        .catch(err => {
-          console.error('Copy failed:', err);
-        });
+      const textarea = document.createElement('textarea');
+      textarea.value = styledText;
+      textarea.style.position = 'fixed';
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        const successful = document.execCommand('copy');
+        showCopyMessage(successful ? "Copied!" : "Copy failed!", successful ? "#2ecc71" : "#e74c3c");
+      } catch {
+        showCopyMessage("Copy failed!", "#e74c3c");
+      }
+
+      document.body.removeChild(textarea);
     }
 
     function showCopyMessage(message, bgColor) {
-      const originalText = copyBtn.textContent;
+      clearTimeout(copyTimeout);
+      const originalText = "Copy Text 📋";
       copyBtn.textContent = message;
       copyBtn.style.backgroundColor = bgColor;
       copyBtn.style.opacity = 0.8;
-
-      setTimeout(() => {
+      copyTimeout = setTimeout(() => {
         copyBtn.textContent = originalText;
         copyBtn.style.backgroundColor = "#4CAF50";
         copyBtn.style.opacity = 1;
       }, 2000);
     }
 
-    // Helpers
     function toScript(text) {
       const map = {'A':'𝒜','B':'ℬ','C':'𝒞','D':'𝒟','E':'ℰ','F':'ℱ','G':'𝒢','H':'ℋ','I':'ℐ','J':'𝒥','K':'𝒦','L':'ℒ','M':'ℳ','N':'𝒩','O':'𝒪','P':'𝒫','Q':'𝒬','R':'ℛ','S':'𝒮','T':'𝒯','U':'𝒰','V':'𝒱','W':'𝒲','X':'𝒳','Y':'𝒴','Z':'𝒵','a':'𝒶','b':'𝒷','c':'𝒸','d':'𝒹','e':'ℯ','f':'𝒻','g':'ℊ','h':'𝒽','i':'𝒾','j':'𝒿','k':'𝓀','l':'𝓁','m':'𝓂','n':'𝓃','o':'ℴ','p':'𝓅','q':'𝓆','r':'𝓇','s':'𝓈','t':'𝓉','u':'𝓊','v':'𝓋','w':'𝓌','x':'𝓍','y':'𝓎','z':'𝓏'};
       return text.split('').map(c => map[c] || c).join('');
-    }
-
-    function toItalic(c) {
-      const code = c.charCodeAt(0);
-      if (c >= 'A' && c <= 'Z') return String.fromCodePoint(0x1D434 + (code - 65));
-      if (c >= 'a' && c <= 'z') return String.fromCodePoint(0x1D44E + (code - 97));
-      return c;
     }
 
     function toGlitch(text) {
@@ -217,236 +326,38 @@
       }).join('');
     }
 
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: 'Stylish Text Generator',
+        text: 'Check out this cool stylish text generator!',
+        url: window.location.href,
+      };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+          successPopup.style.display = 'flex';
+        } else {
+          const dummy = document.createElement('input');
+          document.body.appendChild(dummy);
+          dummy.value = window.location.href;
+          dummy.select();
+          document.execCommand('copy');
+          document.body.removeChild(dummy);
+          successPopup.style.display = 'flex';
+        }
+      } catch {
+        failPopup.style.display = 'flex';
+      }
+    });
+
+    closeSuccessBtn.onclick = () => successPopup.style.display = 'none';
+    closeFailBtn.onclick = () => failPopup.style.display = 'none';
+    successPopup.onclick = e => { if (e.target === successPopup) successPopup.style.display = 'none'; };
+    failPopup.onclick = e => { if (e.target === failPopup) failPopup.style.display = 'none'; };
+
     inputText.addEventListener('input', updateText);
     styleSelect.addEventListener('change', updateText);
-    updateText(); // initial
+    updateText();
   </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6221579944965177"
-     crossorigin="anonymous"></script>
-</body>
-</html>
-<!-- Font Awesome CDN for share icon -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-<style>
-  /* Share Button */
-  #shareBtn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    border-radius: 22px;
-    background: linear-gradient(45deg, #4caf50, #087f23);
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-    transition: background 0.3s ease;
-  }
-  #shareBtn:hover {
-    background: linear-gradient(45deg, #087f23, #4caf50);
-  }
-  #shareBtn i {
-    font-size: 16px;
-  }
-
-  /* Popup Overlay */
-  .popupOverlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.4);
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Popup Box */
-  .popup-content {
-    background: white;
-    padding: 20px 30px;
-    border-radius: 12px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    max-width: 280px;
-  }
-
-  /* Popup Text */
-  .popup-content p {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0 0 15px 0;
-    color: #333;
-  }
-
-  /* Green Close Button */
-  .close-btn-success {
-    padding: 6px 18px;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-    border-radius: 20px;
-    background: linear-gradient(45deg, #4caf50, #087f23);
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .close-btn-success:hover {
-    background: linear-gradient(45deg, #087f23, #4caf50);
-  }
-
-  /* Red Close Button */
-  .close-btn-fail {
-    padding: 6px 18px;
-    font-size: 14px;
-    font-weight: 600;
-    border: none;
-    border-radius: 20px;
-    background: linear-gradient(45deg, #f44336, #b71c1c);
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .close-btn-fail:hover {
-    background: linear-gradient(45deg, #b71c1c, #f44336);
-  }
-</style>
-
-<!-- Share Button -->
-<button id="shareBtn">
-  <i class="fas fa-share-alt"></i> Share This Tool
-</button>
-
-<!-- Success Popup -->
-<div id="successPopup" class="popupOverlay">
-  <div class="popup-content">
-    <p>Your share has been noted – thank you!</p>
-    <button class="close-btn-success" id="closeSuccessBtn">Close</button>
-  </div>
-</div>
-
-<!-- Failure Popup -->
-<div id="failPopup" class="popupOverlay">
-  <div class="popup-content">
-    <p>Sharing cancelled or failed!</p>
-    <button class="close-btn-fail" id="closeFailBtn">Close</button>
-  </div>
-</div>
-
-<script>
-  const shareBtn = document.getElementById('shareBtn');
-  const successPopup = document.getElementById('successPopup');
-  const failPopup = document.getElementById('failPopup');
-  const closeSuccessBtn = document.getElementById('closeSuccessBtn');
-  const closeFailBtn = document.getElementById('closeFailBtn');
-
-  shareBtn.addEventListener('click', async () => {
-    const shareData = {
-      title: 'Stylish Text Generator',
-      text: 'Check out this cool stylish text generator!',
-      url: window.location.href,
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-        successPopup.style.display = 'flex';
-      } else {
-        alert('Sharing not supported on this browser.');
-      }
-    } catch (err) {
-      failPopup.style.display = 'flex';
-    }
-  });
-
-  closeSuccessBtn.addEventListener('click', () => {
-    successPopup.style.display = 'none';
-  });
-
-  closeFailBtn.addEventListener('click', () => {
-    failPopup.style.display = 'none';
-  });
-
-  successPopup.addEventListener('click', (e) => {
-    if (e.target === successPopup) successPopup.style.display = 'none';
-  });
-
-  failPopup.addEventListener('click', (e) => {
-    if (e.target === failPopup) failPopup.style.display = 'none';
-  });
-</script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iText Stylish Tool</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      background: linear-gradient(to right, #000000, #333333);
-      color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-    }
-
-    .nav-buttons {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    .link-btn {
-      text-decoration: none;
-      margin: 10px;
-      padding: 10px 25px;
-      border: 2px solid rgba(255, 255, 255, 0.8);
-      color: rgba(255, 255, 255, 0.85);
-      border-radius: 30px;
-      background-color: transparent;
-      transition: all 0.3s ease;
-      display: inline-block;
-      font-size: 1rem;
-    }
-
-    .link-btn:hover {
-      background-color: #fff;
-      color: #000;
-    }
-
-    @media (max-width: 600px) {
-      .nav-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
-</head>
-<body>
-  <!-- Stylish Buttons Section -->
-  <div class="nav-buttons">
-    <a href="about.html" class="link-btn">About Us</a>
-    <a href="privacy.html" class="link-btn">Privacy Policy</a>
-    <a href="contact.html" class="link-btn">Contact</a>
-    <a href="terms.html" class="link-btn">Terms of Use</a>
-  </div>
-
 </body>
 </html>
