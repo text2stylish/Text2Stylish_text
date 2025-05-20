@@ -107,43 +107,11 @@
           <option value="cyber">Cyber Style</option>
           <option value="graffiti">Graffiti Style</option>
           <option value="modern">Modern Style</option>
-          
           <option value="gradient-text">Gradient Style</option>
         </select>
-      <div>
-  <!DOCTYPE html>
-<html>
-<head>
-  <title>Copy Example</title>
-  <style>
-    .copy-btn {
-      padding: 10px 15px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-<div>
-  <p id="text-to-copy"
-  <button class="copy-btn" onclick="copyText(this)">Copy Text 📋</button>
-</div>
-
-<script>
-  function copyText(button) {
-    const text = document.getElementById("text-to-copy").innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      const original = button.innerText;
-      button.innerText = "Copied! ✅";
-      setTimeout(() => {3
-        button.innerText = original;
-      }, 2000);
-    }).catch(() => {
-      button.innerText = "Failed ❌";
-    });
-  }
-</script>
+      </div>
+      <button class="copy-btn" onclick="copyText()">Copy Text 📋</button>
+    </div>
 
 </body>
 </html>
