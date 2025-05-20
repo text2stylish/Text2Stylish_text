@@ -111,26 +111,43 @@
           <option value="gradient-text">Gradient Style</option>
         </select>
       <div>
-  <p id="text-to-copy"></p>
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Copy Example</title>
+  <style>
+    .copy-btn {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div>
+  <p id="text-to-copy" </p>
   <button class="copy-btn" onclick="copyText(this)">Copy Text 📋</button>
 </div>
 
 <script>
   function copyText(button) {
-    // Text ko copy karo
     const text = document.getElementById("text-to-copy").innerText;
     navigator.clipboard.writeText(text).then(() => {
-      // Button ka text change karo temporarily
-      const originalText = button.innerText;
+      const original = button.innerText;
       button.innerText = "Copied! ✅";
-      
-      // 2 second baad wapas original text dikhao
       setTimeout(() => {
-        button.innerText = originalText;
+        button.innerText = original;
       }, 2000);
+    }).catch(() => {
+      button.innerText = "Failed ❌";
     });
   }
 </script>
+
+</body>
+</html>
+        
         
 
     <div class="output-section">
