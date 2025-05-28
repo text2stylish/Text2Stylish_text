@@ -14,20 +14,47 @@
       font-family: 'Arial', sans-serif;
       padding: 20px;
       margin: 0;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     .container {
       max-width: 800px;
       margin: 0 auto;
       text-align: center;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.6s ease-out 0.3s forwards;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
     h1 {
       font-family: 'Rubik Wet Paint', cursive;
       color: #ff6b6b;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
       font-size: 2.5em;
+      transform: scale(0.9);
+      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
     }
     .input-section {
       margin: 30px 0;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.5s ease-out 0.7s forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     textarea {
       width: 80%;
@@ -37,9 +64,16 @@
       border: 3px solid #ff6b6b;
       background: rgba(255,255,255,0.9);
       font-size: 1.2em;
+      transition: all 0.3s ease;
+    }
+    textarea:focus {
+      transform: scale(1.01);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
     }
     .style-selector {
       margin: 20px 0;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 0.9s forwards;
     }
     select {
       padding: 10px 20px;
@@ -49,6 +83,11 @@
       border: none;
       font-weight: bold;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    select:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .output-section {
       background: rgba(255,255,255,0.1);
@@ -56,12 +95,16 @@
       border-radius: 20px;
       margin: 20px 0;
       min-height: 100px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.5s ease-out 1.1s forwards;
     }
     .styled-text {
       font-size: 1.5em;
       margin: 20px 0;
       padding: 15px;
       word-wrap: break-word;
+      transition: all 0.3s ease;
     }
     .copy-btn {
       background: #4CAF50;
@@ -71,21 +114,30 @@
       border-radius: 25px;
       cursor: pointer;
       font-size: 1.1em;
-      transition: transform 0.3s, background-color 0.3s, opacity 0.3s;
+      transition: transform 0.3s, background-color 0.3s, opacity 0.3s, box-shadow 0.3s;
       margin-top: 15px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 1.3s forwards;
     }
     .copy-btn:hover {
       transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
     }
     .credit {
       margin-top: 30px;
       font-family: 'Dancing Script', cursive;
       font-size: 1.4em;
       color: #ffd93d;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 1.5s forwards;
     }
     .credit a {
       color: #ffd93d;
       text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .credit a:hover {
+      text-shadow: 0 0 8px rgba(255, 217, 61, 0.7);
     }
     #shareBtn {
       display: inline-flex;
@@ -101,14 +153,22 @@
       color: white;
       font-family: 'Poppins', sans-serif;
       box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
       margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 1.7s forwards;
     }
     #shareBtn:hover {
       background: linear-gradient(45deg, #087f23, #4caf50);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     #shareBtn i {
       font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+    #shareBtn:hover i {
+      transform: rotate(15deg);
     }
     .popupOverlay {
       display: none;
@@ -118,6 +178,7 @@
       z-index: 9999;
       justify-content: center;
       align-items: center;
+      animation: fadeIn 0.3s ease-out;
     }
     .popup-content {
       background: white;
@@ -127,6 +188,8 @@
       font-family: 'Poppins', sans-serif;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       max-width: 280px;
+      transform: scale(0.9);
+      animation: popIn 0.3s ease-out forwards;
     }
     .popup-content p {
       font-size: 18px;
@@ -142,23 +205,27 @@
       border-radius: 20px;
       color: white;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
     }
     .close-btn-success {
       background: linear-gradient(45deg, #4caf50, #087f23);
     }
     .close-btn-success:hover {
       background: linear-gradient(45deg, #087f23, #4caf50);
+      transform: scale(1.05);
     }
     .close-btn-fail {
       background: linear-gradient(45deg, #f44336, #b71c1c);
     }
     .close-btn-fail:hover {
       background: linear-gradient(45deg, #b71c1c, #f44336);
+      transform: scale(1.05);
     }
     .nav-buttons {
       margin-top: 40px;
       text-align: center;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 1.9s forwards;
     }
     .link-btn {
       text-decoration: none;
@@ -175,6 +242,8 @@
     .link-btn:hover {
       background-color: #fff;
       color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255,255,255,0.2);
     }
     @media (max-width: 600px) {
       .nav-buttons {
@@ -185,7 +254,6 @@
     }
   </style>
 </head>
-  
 <body>
   <div class="container">
     <h1>iText ✨</h1>
@@ -361,4 +429,4 @@
     updateText();
   </script>
 </body>
-</html>
+  </html>
