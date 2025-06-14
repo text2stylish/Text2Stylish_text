@@ -465,25 +465,44 @@
     }
 
     shareBtn.addEventListener('click', async () => {
-      const shareData = {
-        title: 'Stylish Text Generator',
-        text: 'Check out this cool stylish text generator!',
-        url: window.location.href,
-      };
       try {
+        const shareData = {
+          title: 'iText - Stylish Text Generator',
+          text: 'Check out this cool stylish text generator tool!',
+          url: window.location.href,
+        };
+
         if (navigator.share) {
-          await navigator.share(shareData);
-          successPopup.style.display = 'flex';
+          try {
+            await navigator.share(shareData);
+            successPopup.style.display = 'flex';
+          } catch (err) {
+            console.log('Share was cancelled');
+            failPopup.style.display = 'flex';
+          }
         } else {
-          const dummy = document.createElement('input');
-          document.body.appendChild(dummy);
-          dummy.value = window.location.href;
-          dummy.select();
-          document.execCommand('copy');
-          document.body.removeChild(dummy);
-          successPopup.style.display = 'flex';
+          // Fallback for browsers without Web Share API
+          try {
+            // Try modern Clipboard API first
+            if (navigator.clipboard) {
+              await navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
+            } else {
+              // Fallback to older method
+              const dummy = document.createElement('textarea');
+              document.body.appendChild(dummy);
+              dummy.value = `${shareData.title}\n${shareData.text}\n${shareData.url}`;
+              dummy.select();
+              document.execCommand('copy');
+              document.body.removeChild(dummy);
+            }
+            successPopup.style.display = 'flex';
+          } catch (err) {
+            console.error('Copy failed:', err);
+            failPopup.style.display = 'flex';
+          }
         }
-      } catch {
+      } catch (err) {
+        console.error('Share error:', err);
         failPopup.style.display = 'flex';
       }
     });
@@ -498,4 +517,4 @@
     updateText();
   </script>
 </body>
-        </html>
+                                                      </html>
