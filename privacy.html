@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - iText</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lobster&family=Pacifico&family=Rubik+Glitch&family=Rubik+Wet+Paint&family=Secular+One&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --rgb-1: #ff2a6d;
+      --rgb-2: #d300c5;
+      --rgb-3: #7638fa;
+      --rgb-4: #00d0ff;
+    }
+    
+    body {
+      background: linear-gradient(45deg, #2b1055, #7597de);
+      min-height: 100vh;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+      margin: 0;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out forwards;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* RGB Light Elements */
+    .rgb-light {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.7;
+      z-index: -1;
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    .light-1 {
+      width: 200px;
+      height: 200px;
+      background: var(--rgb-1);
+      top: 10%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+    
+    .light-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--rgb-2);
+      bottom: 10%;
+      right: 5%;
+      animation-delay: 2s;
+    }
+    
+    .light-3 {
+      width: 250px;
+      height: 250px;
+      background: var(--rgb-3);
+      top: 50%;
+      left: 30%;
+      animation-delay: 4s;
+    }
+    
+    .light-4 {
+      width: 180px;
+      height: 180px;
+      background: var(--rgb-4);
+      bottom: 20%;
+      left: 20%;
+      animation-delay: 6s;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(20px, 30px) scale(1.1);
+      }
+      50% {
+        transform: translate(-20px, 10px) scale(0.9);
+      }
+      75% {
+        transform: translate(10px, -20px) scale(1.05);
+      }
+    }
+    
+    @keyframes rgbGradient {
+      0% {
+        background: linear-gradient(45deg, var(--rgb-1), var(--rgb-2));
+      }
+      25% {
+        background: linear-gradient(45deg, var(--rgb-2), var(--rgb-3));
+      }
+      50% {
+        background: linear-gradient(45deg, var(--rgb-3), var(--rgb-4));
+      }
+      75% {
+        background: linear-gradient(45deg, var(--rgb-4), var(--rgb-1));
+      }
+      100% {
+        background: linear-gradient(45deg, var(--rgb-1), var(--rgb-3));
+      }
+    }
+    
+    @keyframes rgbCycle {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.6s ease-out 0.3s forwards;
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    h1 {
+      font-family: 'Rubik Wet Paint', cursive;
+      color: #ff6b6b;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-size: 2.5em;
+      transform: scale(0.9);
+      animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s forwards, textGlow 3s infinite alternate;
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+    
+    @keyframes textGlow {
+      0% {
+        text-shadow: 0 0 5px #ff2a6d, 0 0 10px #ff2a6d;
+      }
+      25% {
+        text-shadow: 0 0 5px #d300c5, 0 0 10px #d300c5;
+      }
+      50% {
+        text-shadow: 0 0 5px #7638fa, 0 0 10px #7638fa;
+      }
+      75% {
+        text-shadow: 0 0 5px #00d0ff, 0 0 10px #00d0ff;
+      }
+      100% {
+        text-shadow: 0 0 5px #ff2a6d, 0 0 10px #ff2a6d;
+      }
+    }
+    
+    @keyframes popIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      text-align: justify;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 0.7s forwards;
+    }
+    
+    .nav-buttons {
+      margin-top: 40px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 0.9s forwards;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .link-btn {
+      text-decoration: none;
+      padding: 12px 25px;
+      border: none;
+      color: white;
+      border-radius: 30px;
+      background: linear-gradient(45deg, var(--rgb-1), var(--rgb-3));
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: rgbGradient 8s infinite alternate;
+    }
+    
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, var(--rgb-2), var(--rgb-4));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .link-btn::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--rgb-1), var(--rgb-2), var(--rgb-3), var(--rgb-4));
+      background-size: 400% 400%;
+      z-index: -2;
+      animation: rgbCycle 8s ease infinite;
+      border-radius: 32px;
+      filter: blur(3px);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .link-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .link-btn:hover::before {
+      opacity: 1;
+    }
+    
+    .link-btn:hover::after {
+      opacity: 0.7;
+    }
+    
+    @media (max-width: 600px) {
+      .nav-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      .link-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+      
+      .light-1, .light-2, .light-3, .light-4 {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- RGB Light Elements -->
+  <div class="rgb-light light-1"></div>
+  <div class="rgb-light light-2"></div>
+  <div class="rgb-light light-3"></div>
+  <div class="rgb-light light-4"></div>
+
+  <div class="container">
+    <h1>Privacy Policy</h1>
+    <p>iText does not collect or store any personal information. All text conversions are done instantly within your browser without sending any data to a server.</p>
+    <p>This tool is built with simplicity and privacy in mind, offering a secure and creative environment for generating stylish text.</p>
+    
+    <div class="nav-buttons">
+      <a href="index.html" class="link-btn">Home</a>
+      <a href="about.html" class="link-btn">About Us</a>
+      <a href="contact.html" class="link-btn">Contact</a>
+      <a href="terms.html" class="link-btn">Terms of Use</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        document.body.style.opacity = 1;
+      }, 100);
+    });
+  </script>
+</body>
+</html>
