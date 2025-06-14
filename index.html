@@ -226,18 +226,22 @@
       text-align: center;
       opacity: 0;
       animation: fadeIn 0.5s ease-out 1.9s forwards;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
     .link-btn {
       text-decoration: none;
-      margin: 10px;
-      padding: 10px 25px;
+      margin: 0 10px;
+      padding: 10px 20px;
       border: 2px solid rgba(255, 255, 255, 0.8);
       color: rgba(255, 255, 255, 0.85);
       border-radius: 30px;
       background-color: transparent;
       transition: all 0.3s ease;
-      display: inline-block;
       font-size: 1rem;
+      white-space: nowrap;
     }
     .link-btn:hover {
       background-color: #fff;
@@ -247,9 +251,13 @@
     }
     @media (max-width: 600px) {
       .nav-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .link-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        margin: 5px;
       }
     }
   </style>
@@ -465,44 +473,25 @@
     }
 
     shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: 'Stylish Text Generator',
+        text: 'Check out this cool stylish text generator!',
+        url: window.location.href,
+      };
       try {
-        const shareData = {
-          title: 'iText - Stylish Text Generator',
-          text: 'Check out this cool stylish text generator tool!',
-          url: window.location.href,
-        };
-
         if (navigator.share) {
-          try {
-            await navigator.share(shareData);
-            successPopup.style.display = 'flex';
-          } catch (err) {
-            console.log('Share was cancelled');
-            failPopup.style.display = 'flex';
-          }
+          await navigator.share(shareData);
+          successPopup.style.display = 'flex';
         } else {
-          // Fallback for browsers without Web Share API
-          try {
-            // Try modern Clipboard API first
-            if (navigator.clipboard) {
-              await navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
-            } else {
-              // Fallback to older method
-              const dummy = document.createElement('textarea');
-              document.body.appendChild(dummy);
-              dummy.value = `${shareData.title}\n${shareData.text}\n${shareData.url}`;
-              dummy.select();
-              document.execCommand('copy');
-              document.body.removeChild(dummy);
-            }
-            successPopup.style.display = 'flex';
-          } catch (err) {
-            console.error('Copy failed:', err);
-            failPopup.style.display = 'flex';
-          }
+          const dummy = document.createElement('input');
+          document.body.appendChild(dummy);
+          dummy.value = window.location.href;
+          dummy.select();
+          document.execCommand('copy');
+          document.body.removeChild(dummy);
+          successPopup.style.display = 'flex';
         }
-      } catch (err) {
-        console.error('Share error:', err);
+      } catch {
         failPopup.style.display = 'flex';
       }
     });
@@ -517,4 +506,4 @@
     updateText();
   </script>
 </body>
-                                                      </html>
+  </html>
