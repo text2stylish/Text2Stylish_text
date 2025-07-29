@@ -772,12 +772,7 @@
       <button class="close-btn-success" id="closeSuccessBtn">Close</button>
     </div>
   </div>
-  <div id="failPopup" class="popupOverlay">
-    <div class="popup-content">
-      <p>Sharing cancelled or failed!</p>
-      <button class="close-btn-fail" id="closeFailBtn">Close</button>
-    </div>
-  </div>
+  
 
   <script>
     // Check if this is the first visit
@@ -798,13 +793,13 @@
           setTimeout(function() {
             preloader.style.display = 'none';
           }, 800); // Match this with the transition duration
-        }, 5000); // 5 seconds loading time
+        }, 4000); // 4 seconds loading time
       });
     }
 
     let copyTimeout;
     let typingTimer;
-    const doneTypingInterval = 4000; // 4 second delay
+    const doneTypingInterval = 3000; // 3 second delay
 
     const styles = {
       'handwriting': text => toScript(text),
