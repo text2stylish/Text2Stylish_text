@@ -1048,6 +1048,108 @@
     inputText.addEventListener('input', updateText);
     styleSelect.addEventListener('change', updateText);
     updateText();
+    // Floating messages array
+    const floatingMessages = [
+      "Do you enjoy our RGB glow effects?",
+      "Which font style do you like the most?",
+      "Have you tested all the styles yet?",
+      "Tell your friends about this awesome tool!",
+      "How do you feel about using this tool?",
+      "Need assistance? Visit our About section!",
+      "Give the upside-down text effect a try!",
+      "The gradient effect looks super cool!",
+      "Which one wins: bold text or aesthetic text?",
+      "Are you a fan of our RGB light effects?",
+      "Experiment with different styles for fresh vibes!",
+      "Spread the word and share this tool!",
+      "Copy your customized text in just one tap!",
+      "Follow our Instagram for the latest updates!",
+      "Which text effect catches your eye the most?",
+      "Flip your text upside down for a fun twist!",
+      "That gradient design really stands out!",
+      "Have you tried the cyber-inspired style yet?"
+    ];
+
+    // Function to show floating message
+    function showFloatingMessage() {
+      const messageElement = document.getElementById('floatingMessage');
+      const messageContent = document.getElementById('messageContent');
+      
+      // Select a random message
+      const randomMessage = floatingMessages[Math.floor(Math.random() * floatingMessages.length)];
+      messageContent.textContent = randomMessage;
+      
+      // Show the message
+      messageElement.classList.remove('hide');
+      messageElement.classList.add('show');
+      
+      // Set random time for next message (between 3-20 seconds)
+      const nextMessageTime = Math.floor(Math.random() * 17000) + 3000;
+      
+      // Hide after 5 seconds
+      setTimeout(() => {
+        messageElement.classList.remove('show');
+        messageElement.classList.add('hide');
+        
+        // Schedule next message
+        setTimeout(showFloatingMessage, nextMessageTime);
+      }, 5000);
+    }
+
+    // Start showing messages after page loads
+    setTimeout(showFloatingMessage, 5000); // First message after 5 seconds
+
+    // Close message functionality
+    document.querySelector('.close-message').addEventListener('click', function() {
+      const messageElement = document.getElementById('floatingMessage');
+      messageElement.classList.remove('show');
+      messageElement.classList.add('hide');
+    });
+    /* Floating message mobile adjustments */
+      .floating-message {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        transform: translateY(-100%);
+      }
+      
+      .floating-message.show {
+        transform: translateY(0);
+      }
+      
+      .floating-message.hide {
+        transform: translateY(-100%);
+    }
+    /* Floating Message Styles */
+    .floating-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      max-width: 300px;
+      transform: translateX(100%);
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      border-left: 4px solid var(--rgb-1);
+      font-family: 'Arial', sans-serif;
+    }
+    
+    .floating-message.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    
+    .极速floating-message.hide {
+      transform: translateX(100%);
+      opacity: 0;
+    }
   </script>
 </body>
 </html>
